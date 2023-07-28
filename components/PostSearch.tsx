@@ -1,3 +1,4 @@
+"use client";
 import { getPostsBySearch } from "@/app/services/getPosts";
 import { FormEventHandler, useState } from "react";
 
