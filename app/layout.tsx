@@ -1,3 +1,5 @@
+import { Providers } from "@/store/provider";
+
 import TheHeader from "@/components/TheHeader";
 import TheFooter from "@/components/TheFooter";
 import "./globals.css";
@@ -21,7 +23,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <TheHeader />
 
-        <main className="container">{children}</main>
+        <main className="container">
+          <Providers>{children}</Providers>
+        </main>
 
         <TheFooter />
       </body>

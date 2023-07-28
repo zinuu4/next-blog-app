@@ -1,12 +1,28 @@
 "use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
-type Props = {
-  posts: any[];
-};
+import { useAppSelector, useAppDispatch } from "@/hooks/useAppState";
+import { getAllPosts } from "@/app/services/getPosts";
+import { setPosts } from "@/store/slices/blogSlice";
 
-const Posts = ({ posts }: Props) => {
-  return (
+const Posts = () => {
+  const { posts } = useAppSelector((state) => state.blog);
+
+  const [loading, setLoading] = useState(true);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    getAllPosts()
+      .then((posts) => dispatch(setPosts(posts)))
+      .finally(() => setLoading(false));
+  }, []);
+
+  return loading ? (
+    <h3>Loading...</h3>
+  ) : (
     <ul>
       {posts.map((post: any) => (
         <li key={post.id}>
